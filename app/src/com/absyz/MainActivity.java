@@ -84,6 +84,7 @@ public class MainActivity extends SalesforceActivity {
 		this.communityUrl= String.valueOf(client.getClientInfo().communityUrl);
 		System.out.println("instanceUrl"+client.getClientInfo().communityUrl);
 		this.accessToken=client.getAuthToken();
+		//need to check for token expiration
 		//System.out.println("accessToken"+client.getAuthToken());
 		// Show everything
 		findViewById(R.id.root).setVisibility(View.VISIBLE);
