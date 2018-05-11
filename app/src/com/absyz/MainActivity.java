@@ -69,8 +69,6 @@ public class MainActivity extends SalesforceActivity {
 	public void onResume() {
 		// Hide everything until we are logged in
 		findViewById(R.id.root).setVisibility(View.INVISIBLE);
-
-
 		
 		super.onResume();
 	}		
@@ -80,6 +78,41 @@ public class MainActivity extends SalesforceActivity {
 		// Keeping reference to rest client
 		this.client = client;
 		System.out.println(client.getClientInfo());
+        RestRequest restRequest = null;
+        try {
+            restRequest = RestRequest.getRequestForQuery(ApiVersionStrings.getVersionNumber(this), "select id,name from account");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        client.sendAsync(restRequest, new AsyncRequestCallback() {
+            @Override
+            public void onSuccess(RestRequest request, final RestResponse result) {
+                result.consumeQuietly(); // consume before going back to main thread
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+
+                        } catch (Exception e) {
+                            onError(e);
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onError(final Exception exception) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this,
+                                MainActivity.this.getString(SalesforceSDKManager.getInstance().getSalesforceR().stringGenericError(), exception.toString()),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
 		//if we are using for Normal Salesforce org we use InstanceURl
 		this.communityUrl= String.valueOf(client.getClientInfo().communityUrl);
 		System.out.println("instanceUrl"+client.getClientInfo().communityUrl);
