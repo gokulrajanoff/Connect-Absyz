@@ -53,10 +53,6 @@ import java.util.ArrayList;
 public class MainActivity extends SalesforceActivity {
 
     private RestClient client;
-    private ArrayAdapter<String> listAdapter;
-	private String communityUrl;
-	private String accessToken;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,105 +65,80 @@ public class MainActivity extends SalesforceActivity {
 	public void onResume() {
 		// Hide everything until we are logged in
 		findViewById(R.id.root).setVisibility(View.INVISIBLE);
-
-
 		
 		super.onResume();
 	}		
 	
 	@Override
-	public void onResume(RestClient client) {
+	public void onResume(final RestClient client) {
 		// Keeping reference to rest client
 		this.client = client;
 		System.out.println(client.getClientInfo());
+        RestRequest restRequest = null;
+        try {
+            restRequest = RestRequest.getRequestForQuery(ApiVersionStrings.getVersionNumber(this), "select id,name from account");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        client.sendAsync(restRequest, new AsyncRequestCallback() {
+            @Override
+            public void onSuccess(RestRequest request, final RestResponse result) {
+                result.consumeQuietly(); // consume before going back to main thread
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Toast.makeText(MainActivity.this,"Valid Session",Toast.LENGTH_LONG).show();
+							String communityUrl= String.valueOf(client.getClientInfo().communityUrl);
+							System.out.println("community URL"+client.getClientInfo().communityUrl);
+							String accessToken=client.getAuthToken();
+							OpenWebView(communityUrl,accessToken);
+
+                        } catch (Exception e) {
+                            onError(e);
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onError(final Exception exception) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this,
+                                MainActivity.this.getString(SalesforceSDKManager.getInstance().getSalesforceR().stringGenericError(), exception.toString()),
+                                Toast.LENGTH_LONG).show();
+
+						TriggerLogOut();
+                    }
+                });
+            }
+        });
 		//if we are using for Normal Salesforce org we use InstanceURl
-		this.communityUrl= String.valueOf(client.getClientInfo().communityUrl);
-		System.out.println("instanceUrl"+client.getClientInfo().communityUrl);
-		this.accessToken=client.getAuthToken();
+
+		//need to check for token expiration
 		//System.out.println("accessToken"+client.getAuthToken());
 		// Show everything
+
+	}
+
+	private void TriggerLogOut() {
+		SalesforceSDKManager.getInstance().logout(this);
+	}
+
+	public void OpenWebView(String communityUrl, String accessToken)
+	{
 		findViewById(R.id.root).setVisibility(View.VISIBLE);
 		//this secure frontdoor is must
-		String url = ""+communityUrl+"/one/one.app?sid="+accessToken+"";
+		String url = ""+ communityUrl +"/one/one.app?sid="+ accessToken +"";
 		System.out.print("FinalURL:\n"+url+"\n");
 		WebView webview = (WebView)findViewById(R.id.webView);
 		webview.setWebViewClient(new WebViewClient());
 		webview.getSettings().setJavaScriptEnabled(true);
 		webview.loadUrl(url);
+
 	}
 
-	/**
-	 * Called when "Logout" button is clicked. 
-	 * 
-	 * @param v
-	 */
-	public void onLogoutClick(View v) {
-		SalesforceSDKManager.getInstance().logout(this);
-	}
-	
-	/**
-	 * Called when "Clear" button is clicked. 
-	 * 
-	 * @param v
-	 */
-	public void onClearClick(View v) {
-		listAdapter.clear();
-	}	
-
-	/**
-	 * Called when "Fetch Contacts" button is clicked
-	 * 
-	 * @param v
-	 * @throws UnsupportedEncodingException 
-	 */
-	public void onFetchContactsClick(View v) throws UnsupportedEncodingException {
-        sendRequest("SELECT Name FROM Contact");
-	}
-
-	/**
-	 * Called when "Fetch Accounts" button is clicked
-	 * 
-	 * @param v
-	 * @throws UnsupportedEncodingException 
-	 */
-	public void onFetchAccountsClick(View v) throws UnsupportedEncodingException {
-		sendRequest("SELECT Name FROM Account");
-	}	
-	
-	private void sendRequest(String soql) throws UnsupportedEncodingException {
-		RestRequest restRequest = RestRequest.getRequestForQuery(ApiVersionStrings.getVersionNumber(this), soql);
-
-		client.sendAsync(restRequest, new AsyncRequestCallback() {
-			@Override
-			public void onSuccess(RestRequest request, final RestResponse result) {
-				result.consumeQuietly(); // consume before going back to main thread
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							listAdapter.clear();
-							JSONArray records = result.asJSONObject().getJSONArray("records");
-							for (int i = 0; i < records.length(); i++) {
-								listAdapter.add(records.getJSONObject(i).getString("Name"));
-							}
-						} catch (Exception e) {
-							onError(e);
-						}
-					}
-				});
-			}
-			
-			@Override
-			public void onError(final Exception exception) {
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						Toast.makeText(MainActivity.this,
-								MainActivity.this.getString(SalesforceSDKManager.getInstance().getSalesforceR().stringGenericError(), exception.toString()),
-								Toast.LENGTH_LONG).show();
-					}
-				});
-			}
-		});
-	}
 }

@@ -4,12 +4,12 @@
         "source": "/Users/passionofromance/Android/Connect/mobile_sdk/SalesforceMobileSDK-Android/libs/SmartStore/build/intermediates/bundles/debug/res/raw/globalstore.json"
     },
     {
-        "merged": "/Users/passionofromance/Android/Connect/app/build/intermediates/res/merged/debug/drawable-xlarge-v4_sf__oauth_background.png.flat",
-        "source": "/Users/passionofromance/Android/Connect/mobile_sdk/SalesforceMobileSDK-Android/libs/SalesforceSDK/build/intermediates/bundles/debug/res/drawable-xlarge-v4/sf__oauth_background.png"
-    },
-    {
         "merged": "/Users/passionofromance/Android/Connect/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
         "source": "/Users/passionofromance/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/8bb113351056f8be78e42d05ed1f1f2c/res/drawable-xhdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
+    },
+    {
+        "merged": "/Users/passionofromance/Android/Connect/app/build/intermediates/res/merged/debug/drawable-xlarge-v4_sf__oauth_background.png.flat",
+        "source": "/Users/passionofromance/Android/Connect/mobile_sdk/SalesforceMobileSDK-Android/libs/SalesforceSDK/build/intermediates/bundles/debug/res/drawable-xlarge-v4/sf__oauth_background.png"
     },
     {
         "merged": "/Users/passionofromance/Android/Connect/app/build/intermediates/res/merged/debug/drawable-ldpi-v4_sf__icon.png.flat",
@@ -88,12 +88,12 @@
         "source": "/Users/passionofromance/Android/Connect/mobile_sdk/SalesforceMobileSDK-Android/libs/SalesforceSDK/build/intermediates/bundles/debug/res/layout/sf__manage_space.xml"
     },
     {
-        "merged": "/Users/passionofromance/Android/Connect/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_googleg_disabled_color_18.png.flat",
-        "source": "/Users/passionofromance/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/8bb113351056f8be78e42d05ed1f1f2c/res/drawable-xxhdpi-v4/googleg_disabled_color_18.png"
-    },
-    {
         "merged": "/Users/passionofromance/Android/Connect/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_light.xml.flat",
         "source": "/Users/passionofromance/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/8bb113351056f8be78e42d05ed1f1f2c/res/drawable/common_google_signin_btn_icon_light.xml"
+    },
+    {
+        "merged": "/Users/passionofromance/Android/Connect/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_googleg_disabled_color_18.png.flat",
+        "source": "/Users/passionofromance/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/8bb113351056f8be78e42d05ed1f1f2c/res/drawable-xxhdpi-v4/googleg_disabled_color_18.png"
     },
     {
         "merged": "/Users/passionofromance/Android/Connect/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_dark_normal.xml.flat",
@@ -124,12 +124,12 @@
         "source": "/Users/passionofromance/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/8bb113351056f8be78e42d05ed1f1f2c/res/color/common_google_signin_btn_text_light.xml"
     },
     {
-        "merged": "/Users/passionofromance/Android/Connect/app/build/intermediates/res/merged/debug/drawable_sf__progress_spinner.xml.flat",
-        "source": "/Users/passionofromance/Android/Connect/mobile_sdk/SalesforceMobileSDK-Android/libs/SalesforceSDK/build/intermediates/bundles/debug/res/drawable/sf__progress_spinner.xml"
-    },
-    {
         "merged": "/Users/passionofromance/Android/Connect/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_sf__icon.png.flat",
         "source": "/Users/passionofromance/Android/Connect/mobile_sdk/SalesforceMobileSDK-Android/libs/SalesforceSDK/build/intermediates/bundles/debug/res/drawable-mdpi-v4/sf__icon.png"
+    },
+    {
+        "merged": "/Users/passionofromance/Android/Connect/app/build/intermediates/res/merged/debug/drawable_sf__progress_spinner.xml.flat",
+        "source": "/Users/passionofromance/Android/Connect/mobile_sdk/SalesforceMobileSDK-Android/libs/SalesforceSDK/build/intermediates/bundles/debug/res/drawable/sf__progress_spinner.xml"
     },
     {
         "merged": "/Users/passionofromance/Android/Connect/app/build/intermediates/res/merged/debug/drawable-xlarge-v4_sf__header_drop_shadow.xml.flat",

@@ -1,4 +1,4 @@
-#Fri May 11 12:51:09 IST 2018
-base.0=/Users/passionofromance/Android/Connect/app/build/intermediates/transforms/dexMerger/debug/5
+#Mon May 14 15:50:39 IST 2018
+base.0=/Users/passionofromance/Android/Connect/app/build/intermediates/transforms/dexMerger/debug/24
 path.0=classes.dex
 renamed.0=classes.dex
