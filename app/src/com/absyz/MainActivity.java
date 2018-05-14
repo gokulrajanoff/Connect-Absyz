@@ -93,6 +93,7 @@ public class MainActivity extends SalesforceActivity {
                     @Override
                     public void run() {
                         try {
+                            Toast.makeText(MainActivity.this,"Valid Session",Toast.LENGTH_LONG).show();
 							String communityUrl= String.valueOf(client.getClientInfo().communityUrl);
 							System.out.println("community URL"+client.getClientInfo().communityUrl);
 							String accessToken=client.getAuthToken();
